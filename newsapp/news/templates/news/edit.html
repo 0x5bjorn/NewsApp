@@ -1,0 +1,14 @@
+{% extends "news/header.html" %}
+
+{% block content %}
+
+    <h1>Edit news</h1>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <button style="background-color:#F4EB16; color:blue" class="btn btn-default" type="submit">Apply</button>
+    </form>
+
+{% endblock %}

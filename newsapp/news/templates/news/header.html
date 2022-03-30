@@ -1,0 +1,52 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="navbar navbar-default">
+        <a class="navbar-brand" href="/">NEWS</a>
+        <ul class="nav navbar-nav">
+            {% if user.is_authenticated and not user.is_staff %}
+                <li><a href="/account">{{user.username|title}}</a></li>
+                <li><a href="/logout">Logout</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            {% endif %}
+        </ul>
+        </div>
+    </nav>
+    
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                    <div class="alert alert-success" role="alert">
+                        <li>{{ message }}</li>
+                    </div>
+                {% elif message.tags == 'info'%}
+                    <div class="alert alert-info" role="alert">
+                        <li>{{ message }}</li>
+                    </div>
+                {% elif message.tags == 'warning'%}
+                    <div class="alert alert-warning" role="alert">
+                        <li>{{ message }}</li>
+                    </div>
+                {% elif message.tags == 'error'%}
+                    <div class="alert alert-danger" role="alert">
+                        <li>{{ message }}</li>
+                    </div>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>

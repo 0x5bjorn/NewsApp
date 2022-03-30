@@ -1,0 +1,27 @@
+------------------------------------------------------
+Depending on the Docker Compose version use:
+    - docker compose 
+OR
+    - docker-compose
+-------------------------------------------------------
+
+First/initial launch commands:
+    - docker-compose up --build -d
+    - docker-compose exec webapp python3 manage.py migrate
+Then go to "localhost:8000" on web browser.
+
+For next subsequent launches use command:
+    - docker-compose up -d
+
+!!! WARNING !!!
+If you don't see anything on "localhost:8000" then re-launch containers:
+    - docker-compose down
+    - docker-compose up -d
+And go to "localhost:8000" on web browser again.
+
+This error might be because after the first launch of the containers 
+web application was built and launched earlier than database system.
+It can be fixed by creating shell script which will put the web application's launch on wait 
+until database system starts running.
+This shell script must be set as an entrypoint in Dockerfile for web application. 
+Unfortunately, I didn't manage to do it on time.

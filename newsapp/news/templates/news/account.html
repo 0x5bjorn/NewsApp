@@ -1,0 +1,22 @@
+{% extends "news/header.html" %}
+
+{% block content %}
+
+    <h1>Your news</h1>
+    {% if user.newslist.all %}
+        <ul>
+        {% for news in user.newslist.all %}
+            <a href="{% url "news:details" news.id %}" class="list-group-item list-group-item-action" style="background-color:#ECEFF1; color:#0277BD">{{ news.title }}
+                <div class="d-flex w-100 justify-content-between">
+                    <small style="color:#263238"> {{ news.publication_date }} </small>
+                </div>
+            </a>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No news are available.</p>
+    {% endif %}
+
+    <a href="/add" target="blank" class="btn btn-info"><strong>Add news here</strong></a>
+
+{% endblock %}
